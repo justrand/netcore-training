@@ -25,6 +25,8 @@ namespace EurojackpotApp
     {
         static void Main(string[] args)
         {
+            int I = 5;
+
             Console.WriteLine("Hello World!");
             Arvontakone eurojackpot = new Arvontakone();
         }

@@ -4,3 +4,8 @@
 
 /EuroJackpotApp/.vs/EuroJackpotApp/v15
 /.vs
+/EuroJackpotApp/EuroJackpotApp/bin/Debug/netcoreapp2.1
+/EuroJackpotApp/EuroJackpotApp/obj
+/EuroJackpotApp/EuroJackpotApp/obj/*
+/EuroJackpotApp/EuroJackpotApp/obj/Debug/
+/EuroJackpotApp/EuroJackpotApp/bin
