@@ -19,6 +19,7 @@ namespace EurojackpotApp
         private int NumerotLkm, LisanumerotLkm;
         public List<int> ArvotutNumerot { get; private set; }
         public List<int> ArvotutLisaNumerot { get; private set; }
+        public List<int> ExcludeList { get; private set; } = new List<int>();
         private int[] NumeroVali, LisaNumeroVali;
         private Random Rnd;
 
@@ -40,10 +41,13 @@ namespace EurojackpotApp
 
         /// <summary>
         /// Asetetaan arvotut numerot ja lisänumerot
+        /// Käytetään excludelistiä, jotta toiseen settiin ei tule
+        /// samoja arvoja kuin ekaan
         /// </summary>
         public void CalculateRandomSets()
         {
             ArvotutNumerot = GetRandomSet(NumeroVali, NumerotLkm);
+            ExcludeList = ArvotutNumerot;
             ArvotutLisaNumerot = GetRandomSet(LisaNumeroVali, LisanumerotLkm);
         }
 
@@ -76,7 +80,7 @@ namespace EurojackpotApp
             while (numeroLista.Count < lkm)
             {
                 int numero = CalculateNext(numeroVali);
-                if (!numeroLista.Contains(numero))
+                if (!numeroLista.Contains(numero) && !ExcludeList.Contains(numero))
                 {
                     numeroLista.Add(numero);
                 }
