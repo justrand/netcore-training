@@ -19,16 +19,20 @@ namespace EurojackpotApp
             Lisanumerot = lisanumerot;
             Numerovali = numerovali;
         }
+
+        public int calculateNext()
+        {
+            return 1;
+        }
     }
 
     class Program
     {
         static void Main(string[] args)
         {
-            int I = 5;
+            Arvontakone eurojackpot = new Arvontakone();
 
             Console.WriteLine("Hello World!");
-            Arvontakone eurojackpot = new Arvontakone();
         }
     }
 }
