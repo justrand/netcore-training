@@ -7,6 +7,8 @@ using System.Collections.Generic;
 /// 
 /// Authors: nimu, just
 /// 
+/// Created: 20.02.2019
+/// 
 /// </summary>
 namespace EurojackpotApp
 {
