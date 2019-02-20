@@ -1,8 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+
+/// <summary>
+/// 
+/// Eurojackpot-arvontakone
+/// 
+/// Authors: nimu, just
+/// 
+/// </summary>
 namespace EurojackpotApp
 {
-
+    /// <summary>
+    /// Arvontakone-luokka
+    /// </summary>
     public class Arvontakone
     {
 
@@ -11,12 +21,14 @@ namespace EurojackpotApp
         public List<int> ArvotutLisaNumerot { get; private set; }
         private int[] NumeroVali, LisaNumeroVali;
         private Random Rnd;
-        
-        public Arvontakone()
-        {
 
-        }
-
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="numerotLkm">Arvottavien numeroiden lukumäärä</param>
+        /// <param name="lisanumerotLkm">Arvottavien lisänumeroiden lukumäärä</param>
+        /// <param name="numeroVali">Väli, josta numeroita arvotaan</param>
+        /// <param name="lisaNumeroVali">Väli, josta lisänumeroita arvotaan</param>
         public Arvontakone(int numerotLkm, int lisanumerotLkm, int[] numeroVali, int[] lisaNumeroVali)
         {
             NumerotLkm = numerotLkm;
@@ -26,13 +38,20 @@ namespace EurojackpotApp
             Rnd = new Random();
         }
 
+        /// <summary>
+        /// Asetetaan arvotut numerot ja lisänumerot
+        /// </summary>
         public void CalculateRandomSets()
         {
             ArvotutNumerot = GetRandomSet(NumeroVali, NumerotLkm);
             ArvotutLisaNumerot = GetRandomSet(LisaNumeroVali, LisanumerotLkm);
-
         }
 
+        /// <summary>
+        /// Laskee seuraavan satunnaisen numeron
+        /// </summary>
+        /// <param name="numeroVali">Väli, josta seuraava numero lasketaan</param>
+        /// <returns>Seuraava satunnainen numero</returns>
         private int CalculateNext(int[] numeroVali)
         {
             if (numeroVali.Length == 2) {
@@ -44,6 +63,13 @@ namespace EurojackpotApp
             }
         }    
 
+        /// <summary>
+        /// Hakee satunnaisen listan annetulta numeroväliltä
+        /// Ei salli duplikaattiarvoja
+        /// </summary>
+        /// <param name="numeroVali">Annettu numeroväli</param>
+        /// <param name="lkm">Satunnaisten numerodien lukumäärä listalle</param>
+        /// <returns>Satunnainen lista numeroita</returns>
         private List<int> GetRandomSet(int[] numeroVali, int lkm)
         {
             List<int> numeroLista = new List<int>();
@@ -60,11 +86,19 @@ namespace EurojackpotApp
         }
     }
 
+    /// <summary>
+    /// Program-luokka
+    /// Täällä pääohjelma, joka ajetaan.
+    /// </summary>
     class Program
     {
+        /// <summary>
+        /// Pääohjelma
+        /// Luodaan arvontakone ja haetaan numerot, sekä tulostetaan ne
+        /// </summary>
+        /// <param name="args"></param>
         static void Main(string[] args)
         {
-            
             Arvontakone eurojackpot = new Arvontakone(5, 2, new[] { 1, 50 }, new[] { 1, 10 });
             eurojackpot.CalculateRandomSets();
             Console.WriteLine("Arvotut numerot:");
