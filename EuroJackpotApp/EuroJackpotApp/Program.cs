@@ -18,11 +18,11 @@ namespace EurojackpotApp
     public class Arvontakone
     {
 
-        private int NumerotLkm, LisanumerotLkm;
+        private readonly int NumerotLkm, LisanumerotLkm;
         public List<int> ArvotutNumerot { get; private set; }
         public List<int> ArvotutLisaNumerot { get; private set; }
         public List<int> ExcludeList { get; private set; } = new List<int>();
-        private int[] NumeroVali, LisaNumeroVali;
+        private readonly int[] NumeroVali, LisaNumeroVali;
         private Random Rnd;
 
         /// <summary>
