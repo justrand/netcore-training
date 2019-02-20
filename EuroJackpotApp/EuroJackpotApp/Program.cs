@@ -108,18 +108,33 @@ namespace EurojackpotApp
     {
         /// <summary>
         /// Pääohjelma
+        /// Kysytään käyttäjältä input (halutaanko uusi rivi)
         /// Luodaan arvontakone ja haetaan numerot, sekä tulostetaan ne
         /// </summary>
         /// <param name="args"></param>
         static void Main(string[] args)
         {
             Arvontakone eurojackpot = new Arvontakone(5, 2, new[] { 1, 50 }, new[] { 1, 10 });
-            eurojackpot.CalculateRandomSets();
-            Console.WriteLine("Arvotut numerot:");
-            eurojackpot.ArvotutNumerot.ForEach(i => Console.Write("{0}\t", i));
-            Console.Write("\n");
-            eurojackpot.ArvotutLisaNumerot.ForEach(i => Console.Write("{0}\t", i));
-            Console.Write("\n");
+
+            bool run = true;
+            while (run)
+            {
+                Console.WriteLine("Syötä 1 saadaksesi uuden lottorivin...");
+                string input = Console.ReadLine();
+                if (input == "1")
+                {
+                    eurojackpot.CalculateRandomSets();
+                    Console.WriteLine("Arvotut numerot:");
+                    eurojackpot.ArvotutNumerot.ForEach(i => Console.Write("{0}\t", i));
+                    Console.Write("\n");
+                    eurojackpot.ArvotutLisaNumerot.ForEach(i => Console.Write("{0}\t", i));
+                    Console.Write("\n");
+                }
+                else
+                {
+                    run = false;
+                }
+            }
         }
     }
 }
