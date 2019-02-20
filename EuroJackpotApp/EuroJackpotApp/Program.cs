@@ -50,7 +50,7 @@ namespace EurojackpotApp
         public void CalculateRandomSets()
         {
             ArvotutNumerot = GetRandomSet(NumeroVali, NumerotLkm);
-            ExcludeList = ArvotutNumerot;
+            ExcludeList.AddRange(ArvotutNumerot);
             ArvotutLisaNumerot = GetRandomSet(LisaNumeroVali, LisanumerotLkm);
         }
 
