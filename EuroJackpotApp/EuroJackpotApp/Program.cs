@@ -25,6 +25,7 @@ namespace EurojackpotApp
 
         /// <summary>
         /// Constructor
+        /// Alustetaan random
         /// </summary>
         /// <param name="numerotLkm">Arvottavien numeroiden lukumäärä</param>
         /// <param name="lisanumerotLkm">Arvottavien lisänumeroiden lukumäärä</param>
