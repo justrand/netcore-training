@@ -82,10 +82,17 @@ namespace EurojackpotApp
             List<int> numeroLista = new List<int>();
             while (numeroLista.Count < lkm)
             {
-                int numero = CalculateNext(numeroVali);
-                if (!numeroLista.Contains(numero) && !ExcludeList.Contains(numero))
+                try
                 {
-                    numeroLista.Add(numero);
+                    int numero = CalculateNext(numeroVali);
+                    if (!numeroLista.Contains(numero) && !ExcludeList.Contains(numero))
+                    {
+                        numeroLista.Add(numero);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
                 }
             }
             numeroLista.Sort();
