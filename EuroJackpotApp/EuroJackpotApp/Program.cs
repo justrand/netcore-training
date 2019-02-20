@@ -1,28 +1,62 @@
 ﻿using System;
-
+using System.Collections.Generic;
 namespace EurojackpotApp
 {
 
     public class Arvontakone
     {
 
-        private int Numerot, Lisanumerot, Numerovali;
-
+        private int NumerotLkm, LisanumerotLkm;
+        public List<int> ArvotutNumerot { get; private set; }
+        public List<int> ArvotutLisaNumerot { get; private set; }
+        private int[] NumeroVali, LisaNumeroVali;
+        private Random Rnd;
+        
         public Arvontakone()
         {
 
         }
 
-        public Arvontakone(int numerot, int lisanumerot, int numerovali)
+        public Arvontakone(int numerotLkm, int lisanumerotLkm, int[] numeroVali, int[] lisaNumeroVali)
         {
-            Numerot = numerot;
-            Lisanumerot = lisanumerot;
-            Numerovali = numerovali;
+            NumerotLkm = numerotLkm;
+            LisanumerotLkm = lisanumerotLkm;
+            NumeroVali = numeroVali;
+            LisaNumeroVali = lisaNumeroVali;
+            Rnd = new Random();
         }
 
-        public int calculateNext()
+        public void CalculateRandomSets()
         {
-            return 1;
+            ArvotutNumerot = GetRandomSet(NumeroVali, NumerotLkm);
+            ArvotutLisaNumerot = GetRandomSet(LisaNumeroVali, LisanumerotLkm);
+
+        }
+
+        private int CalculateNext(int[] numeroVali)
+        {
+            if (numeroVali.Length == 2) {
+                return Rnd.Next(numeroVali[0], numeroVali[1]);
+            }
+            else
+            {
+                throw new Exception("Incorrect array size");
+            }
+        }    
+
+        private List<int> GetRandomSet(int[] numeroVali, int lkm)
+        {
+            List<int> numeroLista = new List<int>();
+            while (numeroLista.Count < lkm)
+            {
+                int numero = CalculateNext(numeroVali);
+                if (!numeroLista.Contains(numero))
+                {
+                    numeroLista.Add(numero);
+                }
+            }
+            numeroLista.Sort();
+            return numeroLista;
         }
     }
 
@@ -30,9 +64,14 @@ namespace EurojackpotApp
     {
         static void Main(string[] args)
         {
-            Arvontakone eurojackpot = new Arvontakone();
-
-            Console.WriteLine("Hello World!");
+            
+            Arvontakone eurojackpot = new Arvontakone(5, 2, new[] { 1, 50 }, new[] { 1, 10 });
+            eurojackpot.CalculateRandomSets();
+            Console.WriteLine("Arvotut numerot:");
+            eurojackpot.ArvotutNumerot.ForEach(i => Console.Write("{0}\t", i));
+            Console.Write("\n");
+            eurojackpot.ArvotutLisaNumerot.ForEach(i => Console.Write("{0}\t", i));
+            Console.Write("\n");
         }
     }
 }
