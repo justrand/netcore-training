@@ -18,10 +18,11 @@ namespace EurojackpotApp
     public class Arvontakone
     {
 
-        private readonly int NumerotLkm, LisanumerotLkm;
         public List<int> ArvotutNumerot { get; private set; }
         public List<int> ArvotutLisaNumerot { get; private set; }
-        public List<int> ExcludeList { get; private set; } = new List<int>();
+        
+        private readonly int NumerotLkm, LisanumerotLkm;
+        private List<int> ArvontaJoukko;
         private readonly int[] NumeroVali, LisaNumeroVali;
         private Random Rnd;
 
@@ -40,6 +41,18 @@ namespace EurojackpotApp
             NumeroVali = numeroVali;
             LisaNumeroVali = lisaNumeroVali;
             Rnd = new Random();
+            Reset();
+        }
+
+        public void Reset()
+        {
+            ArvontaJoukko = new List<int>();
+            int[] temp = new int[(NumeroVali[1] - NumeroVali[0]+1)];
+            for (int i = 0; i < NumeroVali[1]; i++)
+            {
+                temp[i] = NumeroVali[0]+i;
+            }
+            ArvontaJoukko.AddRange(temp);
         }
 
         /// <summary>
@@ -50,7 +63,6 @@ namespace EurojackpotApp
         public void CalculateRandomSets()
         {
             ArvotutNumerot = GetRandomSet(NumeroVali, NumerotLkm);
-            ExcludeList.AddRange(ArvotutNumerot);
             ArvotutLisaNumerot = GetRandomSet(LisaNumeroVali, LisanumerotLkm);
         }
 
@@ -62,7 +74,10 @@ namespace EurojackpotApp
         private int CalculateNext(int[] numeroVali)
         {
             if (numeroVali.Length == 2) {
-                return Rnd.Next(numeroVali[0], numeroVali[1]);
+                int index = Rnd.Next(0, ArvontaJoukko.Count - 1);
+                int rv = ArvontaJoukko[index];
+                ArvontaJoukko.RemoveAt(index);
+                return rv;
             }
             else
             {
@@ -85,10 +100,7 @@ namespace EurojackpotApp
                 try
                 {
                     int numero = CalculateNext(numeroVali);
-                    if (!numeroLista.Contains(numero) && !ExcludeList.Contains(numero))
-                    {
-                        numeroLista.Add(numero);
-                    }
+                    numeroLista.Add(numero);
                 }
                 catch (Exception ex)
                 {
